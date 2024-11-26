@@ -3,7 +3,7 @@ import dspy
 from lms.together import Together
 
 from modules.chatter import ChatterModule
-
+from loaders import load_examples
 lm = Together(
     model="meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo",
     temperature=0.5,
@@ -14,11 +14,11 @@ lm = Together(
     stop=["<|eot_id|>", "<|eom_id|>", "\n\n---\n\n", "\n\n---", "---", "\n---"],
     # stop=["\n", "\n\n"],
 )
-
+examples = load_examples()
 dspy.settings.configure(lm=lm)
 
 chat_history = ChatHistory()
-chatter = ChatterModule(examples=None)
+chatter = ChatterModule(examples=examples)
 while True:
     # Get user input
     user_input = input("You: ")
