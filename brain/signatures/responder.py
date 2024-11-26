@@ -9,6 +9,7 @@ class Responder(dspy.Signature):
     """
 
     chat_history: ChatHistory = dspy.InputField(desc="the chat history")
+    current_time: str = dspy.InputField(desc="Contains the current time of fan")
 
     output: str = dspy.OutputField(
         prefix="Your Message:",
