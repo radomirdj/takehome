@@ -4,6 +4,8 @@ from lms.together import Together
 
 from modules.chatter import ChatterModule
 from loaders import load_examples
+from datetime import datetime
+
 lm = Together(
     model="meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo",
     temperature=0.5,
@@ -28,6 +30,7 @@ while True:
         ChatMessage(
             from_creator=False,
             content=user_input,
+            message_time = datetime.now()
         ),
     )
 
@@ -39,6 +42,7 @@ while True:
         ChatMessage(
             from_creator=True,
             content=response,
+            message_time = datetime.now()
         ),
     )
     # Print response

@@ -16,6 +16,7 @@ def load_examples():
                         ChatMessage(
                             from_creator=chat_history_message['from_creator'],
                             content=chat_history_message['content'],
+                            message_time = None,
                         ),
                     )
             output = chat_example['output']
