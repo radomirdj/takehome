@@ -5,6 +5,8 @@ from lms.together import Together
 from modules.chatter import ChatterModule
 from loaders import load_examples
 from datetime import datetime
+from modules.filterer import FiltererModule
+
 
 lm = Together(
     model="meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo",
@@ -21,6 +23,8 @@ dspy.settings.configure(lm=lm)
 
 chat_history = ChatHistory()
 chatter = ChatterModule(examples=examples)
+filter = FiltererModule()
+
 while True:
     # Get user input
     user_input = input("You: ")
@@ -35,7 +39,8 @@ while True:
     )
 
     # Send request to endpoint
-    response = chatter(chat_history=chat_history).output
+    response_basic = chatter(chat_history=chat_history).output
+    response = filter(creator_message=response_basic).output
 
     # Append response to chat history
     chat_history.messages.append(
